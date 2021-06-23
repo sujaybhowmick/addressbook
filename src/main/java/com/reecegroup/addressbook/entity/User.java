@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
@@ -24,8 +24,9 @@ public class User {
     @Column(name="middle_name", length = 100)
     private String middleName;
 
-    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Contact> contacts = new ArrayList<>();
+    @OneToMany(mappedBy = "address_books", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AddressBook> addressBooks = new ArrayList<>();
+
 
     public String getUserName() {
         return userName;
@@ -59,12 +60,12 @@ public class User {
         this.middleName = middleName;
     }
 
-    public List<Contact> getContacts() {
-        return contacts;
+    public List<AddressBook> getAddressBooks() {
+        return addressBooks;
     }
 
-    public void setContacts(List<Contact> contacts) {
-        this.contacts = contacts;
+    public void setAddressBooks(List<AddressBook> addressBooks) {
+        this.addressBooks = addressBooks;
     }
 
     @Override

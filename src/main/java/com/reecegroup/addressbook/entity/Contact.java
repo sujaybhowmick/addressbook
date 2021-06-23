@@ -5,7 +5,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "contacts")
-public class Contact {
+public class Contact extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,14 +20,15 @@ public class Contact {
     @Column(name="last_name", nullable = false, length = 100)
     private String lastName;
 
-    @Column(name="middle_name", length = 100)
+    @Column(name="middle_name",
+            length = 100)
     private String middleName;
 
     @Column(name = "phone_number", nullable = false, length = 15)
     private String phoneNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private User user;
+    private AddressBook addressBook;
 
     public String getUserName() {
         return userName;
@@ -69,12 +70,12 @@ public class Contact {
         this.phoneNumber = phoneNumber;
     }
 
-    public User getUser() {
-        return user;
+    public AddressBook getAddressBook() {
+        return addressBook;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAddressBook(AddressBook addressBook) {
+        this.addressBook = addressBook;
     }
 
     @Override
