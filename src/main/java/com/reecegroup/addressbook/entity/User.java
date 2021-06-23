@@ -3,6 +3,7 @@ package com.reecegroup.addressbook.entity;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -20,7 +21,7 @@ public class User {
     @Column(name="last_name", nullable = false, length = 100)
     private String lastName;
 
-    @Column(name="middle_name", nullable = true, length = 100)
+    @Column(name="middle_name", length = 100)
     private String middleName;
 
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -64,5 +65,18 @@ public class User {
 
     public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return id.equals(user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

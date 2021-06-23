@@ -1,6 +1,7 @@
 package com.reecegroup.addressbook.entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "contacts")
@@ -19,7 +20,7 @@ public class Contact {
     @Column(name="last_name", nullable = false, length = 100)
     private String lastName;
 
-    @Column(name="middle_name", nullable = true, length = 100)
+    @Column(name="middle_name", length = 100)
     private String middleName;
 
     @Column(name = "phone_number", nullable = false, length = 15)
@@ -74,5 +75,18 @@ public class Contact {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Contact)) return false;
+        Contact contact = (Contact) o;
+        return id.equals(contact.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
