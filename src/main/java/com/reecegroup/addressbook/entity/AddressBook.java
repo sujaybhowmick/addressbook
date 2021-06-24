@@ -12,19 +12,13 @@ public class AddressBook extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User owner;
+    @Column(name = "addressBookName", unique = true, nullable = false)
+    private String addressBookName;
 
-    @OneToMany(mappedBy = "contacts", cascade = CascadeType.ALL, orphanRemoval = true)
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "address_book_id")
     private List<Contact> contacts = new ArrayList<>();
-
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
 
     public List<Contact> getContacts() {
         return contacts;
@@ -32,5 +26,13 @@ public class AddressBook extends BaseEntity {
 
     public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;
+    }
+
+    public String getAddressBookName() {
+        return addressBookName;
+    }
+
+    public void setAddressBookName(String addressBookName) {
+        this.addressBookName = addressBookName;
     }
 }

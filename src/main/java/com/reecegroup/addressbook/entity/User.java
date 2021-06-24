@@ -24,7 +24,8 @@ public class User extends BaseEntity {
     @Column(name="middle_name", length = 100)
     private String middleName;
 
-    @OneToMany(mappedBy = "address_books", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "owner_id")
     private List<AddressBook> addressBooks = new ArrayList<>();
 
 

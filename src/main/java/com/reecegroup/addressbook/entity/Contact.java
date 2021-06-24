@@ -11,8 +11,8 @@ public class Contact extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "user_name", nullable = false, unique = true, length = 25)
-    private String userName;
+    @Column(name = "contact_hash", nullable = false, unique = true, length = 25)
+    private String contactHash;
 
     @Column(name = "first_name", nullable = false, length = 100)
     private String firstName;
@@ -26,17 +26,6 @@ public class Contact extends BaseEntity {
 
     @Column(name = "phone_number", nullable = false, length = 15)
     private String phoneNumber;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private AddressBook addressBook;
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -70,12 +59,12 @@ public class Contact extends BaseEntity {
         this.phoneNumber = phoneNumber;
     }
 
-    public AddressBook getAddressBook() {
-        return addressBook;
+    public String getContactHash() {
+        return contactHash;
     }
 
-    public void setAddressBook(AddressBook addressBook) {
-        this.addressBook = addressBook;
+    public void setContactHash(String contactHash) {
+        this.contactHash = contactHash;
     }
 
     @Override

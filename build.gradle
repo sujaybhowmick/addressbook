@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.5.1'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id "org.flywaydb.flyway" version "7.10.0"
 }
 
 group = 'com.reecegroup'
@@ -18,8 +19,16 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	runtimeOnly 'com.h2database:h2'
+	developmentOnly 'org.flywaydb:flyway-core:7.10.0'
+
 }
 
 test {
 	useJUnitPlatform()
+}
+
+flyway {
+	url = 'jdbc:h2:file:/tmp/addressbook'
+	user = 'sa'
+	password = 'sa'
 }
