@@ -1,1 +1,1 @@
-CREATE TABLE CONTACTS (ID BIGINT NOT NULL, CONTACT_HASH VARCHAR(25) NOT NULL, FIRST_NAME VARCHAR(100) NOT NULL, LAST_NAME VARCHAR(100) NOT NULL, MIDDLE_NAME VARCHAR(100), PHONE_NUMBER VARCHAR(15) NOT NULL, ADDRESS_BOOK_ID BIGINT, PRIMARY KEY (ID));
+create table contacts (id bigint not null, contact_hash varchar(25) not null, first_name varchar(100) not null, last_name varchar(100) not null, middle_name varchar(100), phone_number varchar(15) not null, address_book_id bigint, primary key (id));

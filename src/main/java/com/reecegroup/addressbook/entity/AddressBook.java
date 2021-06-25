@@ -9,7 +9,8 @@ import java.util.List;
 public class AddressBook extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.AUTO, generator = "addressbook_seq")
+    @SequenceGenerator(name = "addressbook_seq", sequenceName = "hibernate_sequence")
     private Long id;
 
     @Column(name = "addressBookName", unique = true, nullable = false)

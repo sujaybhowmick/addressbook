@@ -1,5 +1,5 @@
-ALTER TABLE ADDRESS_BOOKS ADD CONSTRAINT UK_8UMO2VY6OX65YLN40X8S1LQX2 UNIQUE (ADDRESS_BOOK_NAME);
-ALTER TABLE CONTACTS ADD CONSTRAINT UK_3SM3VVCGBB4XDHI6NVJMGNHD8 UNIQUE (CONTACT_HASH);
-ALTER TABLE USERS ADD CONSTRAINT UK_K8D0F2N7N88W1A16YHUA64ONX UNIQUE (USER_NAME);
-ALTER TABLE ADDRESS_BOOKS ADD CONSTRAINT FK2DJ8OHYCF9G1LF18YPKCY8VXW FOREIGN KEY (OWNER_ID) REFERENCES USERS;
-ALTER TABLE CONTACTS ADD CONSTRAINT FK53X4IHL1WMIRIUN7WJ3VVLIS0 FOREIGN KEY (ADDRESS_BOOK_ID) REFERENCES ADDRESS_BOOKS;
+alter table address_books add constraint uk_8umo2vy6ox65yln40x8s1lqx2 unique (address_book_name);
+alter table contacts add constraint uk_3sm3vvcgbb4xdhi6nvjmgnhd8 unique (contact_hash);
+alter table users add constraint uk_k8d0f2n7n88w1a16yhua64onx unique (user_name);
+alter table address_books add constraint fk2dj8ohycf9g1lf18ypkcy8vxw foreign key (owner_id) references users;
+alter table contacts add constraint fk53x4ihl1wmiriun7wj3vvlis0 foreign key (address_book_id) references address_books;

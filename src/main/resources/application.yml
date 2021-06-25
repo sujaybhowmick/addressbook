@@ -1,15 +1,10 @@
 spring:
   jpa:
-    generate-ddl: true
+    generate-ddl: false
     database-platform: org.hibernate.dialect.H2Dialect
-    properties:
-      javax:
-        persistence:
-          schema-generation:
-            create-source: metadata
-            scripts:
-              action: create
-              create-target: src/main/resources/ddl_jpa_creation.sql
+    hibernate:
+      use-new-id-generator-mappings: false
+      default_schema: "public"
   datasource:
     url: 'jdbc:h2:file:/tmp/addressbook'
     driverClassName: org.h2.Driver

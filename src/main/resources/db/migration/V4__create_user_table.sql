@@ -1,1 +1,1 @@
-CREATE TABLE USERS (ID BIGINT NOT NULL, FIRST_NAME VARCHAR(100) NOT NULL, LAST_NAME VARCHAR(100) NOT NULL, MIDDLE_NAME VARCHAR(100), USER_NAME VARCHAR(25) NOT NULL, PRIMARY KEY (ID));
+create table users (id bigint not null, first_name varchar(100) not null, last_name varchar(100) not null, middle_name varchar(100), user_name varchar(25) not null unique, primary key (id));

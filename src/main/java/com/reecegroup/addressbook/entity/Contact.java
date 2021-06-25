@@ -8,7 +8,8 @@ import java.util.Objects;
 public class Contact extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.AUTO, generator = "contact_seq")
+    @SequenceGenerator(name = "contact_seq", sequenceName = "hibernate_sequence")
     private Long id;
 
     @Column(name = "contact_hash", nullable = false, unique = true, length = 25)

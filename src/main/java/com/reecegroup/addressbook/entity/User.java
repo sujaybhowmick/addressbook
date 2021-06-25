@@ -8,8 +8,18 @@ import java.util.Objects;
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
+    public User() {}
+
+    public User(Builder builder) {
+        this.userName = builder.userName;
+        this.firstName = builder.firstName;
+        this.lastName = builder.lastName;
+        this.middleName = builder.middleName;
+    }
+
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.AUTO, generator = "user_seq")
+    @SequenceGenerator(name = "user_seq", sequenceName = "hibernate_sequence")
     private Long id;
 
     @Column(name = "user_name", nullable = false, unique = true, length = 25)
@@ -80,5 +90,35 @@ public class User extends BaseEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public static class Builder {
+        private String firstName;
+        private String lastName;
+        private String middleName;
+        private String userName;
+
+        public Builder(String userName) {
+            this.userName = userName;
+        }
+
+        public Builder firstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
+        public Builder lastName(String lastName){
+            this.lastName = lastName;
+            return this;
+        }
+
+        public Builder middleName(String middleName) {
+            this.middleName = middleName;
+            return this;
+        }
+
+        public User build() {
+            return new User(this);
+        }
     }
 }

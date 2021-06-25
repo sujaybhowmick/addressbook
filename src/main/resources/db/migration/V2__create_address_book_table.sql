@@ -1,1 +1,1 @@
-CREATE TABLE ADDRESS_BOOKS (ID BIGINT NOT NULL, ADDRESS_BOOK_NAME VARCHAR(255) NOT NULL, OWNER_ID BIGINT, PRIMARY KEY (ID));
+create table address_books (id bigint not null, address_book_name varchar(255) not null, owner_id bigint, primary key (id));
