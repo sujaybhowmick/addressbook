@@ -1,6 +1,5 @@
 package com.reecegroup.addressbook.repository;
 
-import static org.assertj.core.api.Assertions.*;
 import com.reecegroup.addressbook.entity.AddressBook;
 import com.reecegroup.addressbook.entity.Contact;
 import com.reecegroup.addressbook.entity.User;
@@ -17,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
@@ -44,7 +43,7 @@ class ContactRepositoryTest extends BaseRepositoryTest {
         List<AddressBook> addressBooks = user.getAddressBooks();
 
         final Contact contact = RepositoryTestHelper.createContact(FIRST_NAME,
-                LAST_NAME, MIDDLE_NAME,PHONE_NUMBER);
+                LAST_NAME, MIDDLE_NAME, PHONE_NUMBER);
         addressBooks.get(0).getContacts().add(contact);
         contact.setAddressBook(addressBooks.get(0));
         addressBookRepository.save(addressBooks.get(0));

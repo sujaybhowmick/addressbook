@@ -36,7 +36,8 @@ public class Contact extends BaseEntity {
     private AddressBook addressBook;
 
 
-    public Contact() {}
+    public Contact() {
+    }
 
     public Contact(Builder builder) {
         this.firstName = builder.firstName;
@@ -122,7 +123,8 @@ public class Contact extends BaseEntity {
 
         private String contactHash;
 
-        public Builder() {}
+        public Builder() {
+        }
 
         public Builder firstName(final String firstName) {
             this.firstName = firstName;
@@ -145,7 +147,7 @@ public class Contact extends BaseEntity {
         }
 
         public Builder contactHash() {
-            if(this.firstName != null && this.lastName != null & this.phoneNumber != null) {
+            if (this.firstName != null && this.lastName != null & this.phoneNumber != null) {
                 StringBuilder sb = new StringBuilder(this.firstName.toLowerCase());
                 sb.append(this.lastName.toLowerCase());
                 sb.append(this.middleName != null ? this.middleName.toLowerCase() : "");

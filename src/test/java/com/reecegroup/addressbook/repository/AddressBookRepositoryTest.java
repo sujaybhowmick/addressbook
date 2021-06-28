@@ -1,6 +1,5 @@
 package com.reecegroup.addressbook.repository;
 
-import static org.assertj.core.api.Assertions.*;
 import com.reecegroup.addressbook.entity.AddressBook;
 import com.reecegroup.addressbook.entity.User;
 import org.junit.jupiter.api.AfterEach;
@@ -10,12 +9,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @ExtendWith(SpringExtension.class)

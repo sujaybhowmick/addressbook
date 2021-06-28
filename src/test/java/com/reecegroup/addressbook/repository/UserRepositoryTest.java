@@ -1,6 +1,5 @@
 package com.reecegroup.addressbook.repository;
 
-import static org.assertj.core.api.Assertions.*;
 import com.reecegroup.addressbook.entity.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +12,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.fail;
 
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
@@ -47,7 +48,7 @@ class UserRepositoryTest extends BaseRepositoryTest {
         assertThat(user).isNotNull();
         try {
             userRepository.delete(user);
-        }catch (Exception e) {
+        } catch (Exception e) {
             fail();
         }
         Optional<User> deletedUser = userRepository.findByUserName(user.getUserName());
