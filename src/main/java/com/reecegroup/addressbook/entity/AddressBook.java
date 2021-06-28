@@ -16,7 +16,7 @@ public class AddressBook extends BaseEntity {
     @Column(name = "addressBookName", unique = true, nullable = false)
     private String addressBookName;
 
-    @ManyToOne(targetEntity = User.class)
+    @ManyToOne(targetEntity = User.class, optional = false)
     @JoinColumn(name = "owner_id")
     private User owner;
 

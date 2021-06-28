@@ -1,23 +1,24 @@
 package com.reecegroup.addressbook.repository;
 
+import static org.assertj.core.api.Assertions.*;
 import com.reecegroup.addressbook.entity.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
-class UserRepositoryTest {
-
-    @Autowired
-    private UserRepository userRepository;
+@ActiveProfiles("test")
+class UserRepositoryTest extends BaseRepositoryTest {
 
     @BeforeEach
     void setUp() {
@@ -28,31 +29,41 @@ class UserRepositoryTest {
     }
 
     @Test
-    public void testInsertUser() {
-        userRepository.save(createUser());
-        User newUser = userRepository.findByUserName("sujaybhowmick");
-        assertNotNull(newUser);
+    public void insertUser() {
+        userRepository.save(RepositoryTestHelper.createUser(USER_NAME));
+        Optional<User> persistedUser = userRepository.findByUserName(USER_NAME);
+        assertThat(persistedUser.isPresent()).isTrue();
+        User user = persistedUser.orElseThrow();
+        assertThat(user.getCreatedAt()).isNotNull();
+
     }
 
     @Test
-    public void testUniqueUserCreation() {
-        userRepository.save(createUser());
-        User newUser = userRepository.findByUserName("sujaybhowmick");
-        assertNotNull(newUser);
+    public void deleteUser() {
+        userRepository.save(RepositoryTestHelper.createUser(USER_NAME));
+        Optional<User> persistedUser = userRepository.findByUserName(USER_NAME);
+        assertThat(persistedUser.isPresent()).isTrue();
+        User user = persistedUser.orElseThrow();
+        assertThat(user).isNotNull();
         try {
-            userRepository.save(createUser());
-            fail("Test for unique user creation failed");
-        }catch (DataIntegrityViolationException e) {
-            assertTrue(true);
+            userRepository.delete(user);
+        }catch (Exception e) {
+            fail();
+        }
+        Optional<User> deletedUser = userRepository.findByUserName(user.getUserName());
+        assertFalse(deletedUser.isPresent());
+    }
+
+    @Test
+    public void uniqueUserCreation() {
+        userRepository.save(RepositoryTestHelper.createUser(USER_NAME));
+        Optional<User> newUser = userRepository.findByUserName(USER_NAME);
+        assertThat(newUser.isPresent()).isTrue();
+        try {
+            userRepository.save(RepositoryTestHelper.createUser(USER_NAME));
+            fail();
+        } catch (DataIntegrityViolationException e) {
+            assertThat(true).isTrue();
         }
     }
-
-    private User createUser() {
-        final User.Builder builder = new User.Builder("sujaybhowmick");
-        return builder
-                .firstName("Sujay")
-                .lastName("Bhowmick")
-                .build();
-    }
-
 }
