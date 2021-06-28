@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Contact extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO, generator = "contact_seq")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "contact_seq")
     @SequenceGenerator(name = "contact_seq", sequenceName = "hibernate_sequence")
     private Long id;
 
@@ -18,15 +18,19 @@ public class Contact extends BaseEntity {
     @Column(name = "first_name", nullable = false, length = 100)
     private String firstName;
 
-    @Column(name="last_name", nullable = false, length = 100)
+    @Column(name = "last_name", nullable = false, length = 100)
     private String lastName;
 
-    @Column(name="middle_name",
+    @Column(name = "middle_name",
             length = 100)
     private String middleName;
 
     @Column(name = "phone_number", nullable = false, length = 15)
     private String phoneNumber;
+
+    @ManyToOne(targetEntity = AddressBook.class)
+    @JoinColumn(name = "address_book_id")
+    private AddressBook addressBook;
 
     public String getFirstName() {
         return firstName;
@@ -58,6 +62,14 @@ public class Contact extends BaseEntity {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public AddressBook getAddressBook() {
+        return addressBook;
+    }
+
+    public void setAddressBook(AddressBook addressBook) {
+        this.addressBook = addressBook;
     }
 
     public String getContactHash() {

@@ -8,7 +8,24 @@ import java.util.Objects;
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
-    public User() {}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "user_seq")
+    @SequenceGenerator(name = "user_seq", sequenceName = "hibernate_sequence")
+    private Long id;
+    @Column(name = "user_name", nullable = false, unique = true, length = 25)
+    private String userName;
+    @Column(name = "first_name", nullable = false, length = 100)
+    private String firstName;
+    @Column(name = "last_name", nullable = false, length = 100)
+    private String lastName;
+    @Column(name = "middle_name", length = 100)
+    private String middleName;
+    @OneToMany(targetEntity = AddressBook.class, cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    private List<AddressBook> addressBooks = new ArrayList<>();
+
+    public User() {
+    }
 
     public User(Builder builder) {
         this.userName = builder.userName;
@@ -17,27 +34,9 @@ public class User extends BaseEntity {
         this.middleName = builder.middleName;
     }
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO, generator = "user_seq")
-    @SequenceGenerator(name = "user_seq", sequenceName = "hibernate_sequence")
-    private Long id;
-
-    @Column(name = "user_name", nullable = false, unique = true, length = 25)
-    private String userName;
-
-    @Column(name = "first_name", nullable = false, length = 100)
-    private String firstName;
-
-    @Column(name="last_name", nullable = false, length = 100)
-    private String lastName;
-
-    @Column(name="middle_name", length = 100)
-    private String middleName;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "owner_id")
-    private List<AddressBook> addressBooks = new ArrayList<>();
-
+    public Long getId() {
+        return id;
+    }
 
     public String getUserName() {
         return userName;
@@ -93,10 +92,10 @@ public class User extends BaseEntity {
     }
 
     public static class Builder {
+        private final String userName;
         private String firstName;
         private String lastName;
         private String middleName;
-        private String userName;
 
         public Builder(String userName) {
             this.userName = userName;
@@ -107,7 +106,7 @@ public class User extends BaseEntity {
             return this;
         }
 
-        public Builder lastName(String lastName){
+        public Builder lastName(String lastName) {
             this.lastName = lastName;
             return this;
         }
