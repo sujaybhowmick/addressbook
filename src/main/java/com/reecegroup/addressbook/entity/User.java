@@ -1,5 +1,7 @@
 package com.reecegroup.addressbook.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,7 @@ public class User extends BaseEntity {
     private String middleName;
     @OneToMany(targetEntity = AddressBook.class, cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    @JsonIgnore
     private List<AddressBook> addressBooks = new ArrayList<>();
 
     public User() {

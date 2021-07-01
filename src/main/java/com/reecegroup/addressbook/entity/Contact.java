@@ -147,15 +147,11 @@ public class Contact extends BaseEntity {
         }
 
         public Builder contactHash() {
-            if (this.firstName != null && this.lastName != null & this.phoneNumber != null) {
-                StringBuilder sb = new StringBuilder(this.firstName.toLowerCase());
-                sb.append(this.lastName.toLowerCase());
-                sb.append(this.middleName != null ? this.middleName.toLowerCase() : "");
-                sb.append(this.phoneNumber);
-                this.contactHash = DigestUtils.md5DigestAsHex(sb.toString().getBytes(StandardCharsets.UTF_8));
-                return this;
-            }
-            throw new IllegalArgumentException("First name, last name and phone number cannot be empty");
+            String sb = this.firstName.toLowerCase() + this.lastName.toLowerCase() +
+                    (this.middleName != null ? this.middleName.toLowerCase() : "") +
+                    this.phoneNumber.toLowerCase();
+            this.contactHash = DigestUtils.md5DigestAsHex(sb.getBytes(StandardCharsets.UTF_8));
+            return this;
         }
 
         public Contact build() {
