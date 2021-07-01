@@ -15,7 +15,7 @@ public class Contact extends BaseEntity {
     @SequenceGenerator(name = "contact_seq", sequenceName = "hibernate_sequence")
     private Long id;
 
-    @Column(name = "contact_hash", nullable = false, unique = true, length = 32)
+    @Column(name = "contact_hash", nullable = false, length = 32)
     private String contactHash;
 
     @Column(name = "first_name", nullable = false, length = 100)
