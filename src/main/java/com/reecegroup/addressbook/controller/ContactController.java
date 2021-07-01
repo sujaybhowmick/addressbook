@@ -4,7 +4,6 @@ import com.reecegroup.addressbook.entity.Contact;
 import com.reecegroup.addressbook.model.request.ContactRequest;
 import com.reecegroup.addressbook.model.response.ContactResponse;
 import com.reecegroup.addressbook.service.AddressBookService;
-import com.reecegroup.addressbook.service.UserService;
 import com.reecegroup.addressbook.service.manager.AddressBookManagerHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,8 +15,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1")
 public class ContactController {
 
-    private Logger log = LoggerFactory.getLogger(ContactController.class);
     private final AddressBookService addressBookService;
+    private final Logger log = LoggerFactory.getLogger(ContactController.class);
 
 
     public ContactController(AddressBookService addressBookService) {

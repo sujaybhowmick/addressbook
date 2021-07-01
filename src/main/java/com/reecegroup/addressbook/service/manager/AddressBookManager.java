@@ -14,13 +14,12 @@ import com.reecegroup.addressbook.service.AddressBookService;
 import com.reecegroup.addressbook.service.BaseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.html.Option;
-import java.util.*;
+import java.util.Collection;
+import java.util.Optional;
 
 @Service
 public class AddressBookManager extends BaseService implements AddressBookService {
@@ -43,7 +42,7 @@ public class AddressBookManager extends BaseService implements AddressBookServic
         user.getAddressBooks().add(addressBook);
         try {
             return addressBookRepository.save(addressBook);
-        }catch (DataIntegrityViolationException de) {
+        } catch (DataIntegrityViolationException de) {
             log.error("Duplicate Address book");
             throw new AddressBookExistsException(name, user.getUserName());
         }
@@ -73,9 +72,9 @@ public class AddressBookManager extends BaseService implements AddressBookServic
     @Override
     public Contact addContact(final Contact contact, final Long addressBookId) {
         Optional<AddressBook> optionalAddressBook = this.getAddressBookById(addressBookId);
-        if(optionalAddressBook.isPresent()) {
+        if (optionalAddressBook.isPresent()) {
             final AddressBook addressBook = optionalAddressBook.get();
-            if(this.contactExistsInAddressBook(contact.getContactHash(), addressBook)) {
+            if (this.contactExistsInAddressBook(contact.getContactHash(), addressBook)) {
                 throw new ContactExistsException(contact);
             }
             contact.setAddressBook(addressBook);
@@ -88,7 +87,7 @@ public class AddressBookManager extends BaseService implements AddressBookServic
     @Override
     public Contact removeContact(Long contactId) {
         final Optional<Contact> optionalContact = contactRepository.findById(contactId);
-        if(optionalContact.isPresent()) {
+        if (optionalContact.isPresent()) {
             final Contact contact = optionalContact.get();
             contactRepository.delete(contact);
             return contact;

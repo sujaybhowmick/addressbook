@@ -14,17 +14,15 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.Collection;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
 public class AddressBookController {
 
-    private Logger log = LoggerFactory.getLogger(AddressBookController.class);
     private final UserService userService;
     private final AddressBookService addressBookService;
+    private final Logger log = LoggerFactory.getLogger(AddressBookController.class);
 
     public AddressBookController(final UserService userService, final AddressBookService addressBookService) {
         this.userService = userService;

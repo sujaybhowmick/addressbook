@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.fail;
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
-class UserManagerTest  {
+class UserManagerTest {
 
 
     @Autowired

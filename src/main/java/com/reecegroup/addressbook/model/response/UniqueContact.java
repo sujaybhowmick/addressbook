@@ -6,6 +6,13 @@ public class UniqueContact {
     private final String middleName;
     private final String phoneNumber;
 
+    private UniqueContact(Builder builder) {
+        this.firstName = builder.firstName;
+        this.lastName = builder.lastName;
+        this.middleName = builder.middleName;
+        this.phoneNumber = builder.phoneNumber;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -22,20 +29,14 @@ public class UniqueContact {
         return phoneNumber;
     }
 
-    private UniqueContact(Builder builder) {
-        this.firstName = builder.firstName;
-        this.lastName = builder.lastName;
-        this.middleName = builder.middleName;
-        this.phoneNumber = builder.phoneNumber;
-    }
-
     public static class Builder {
         private String firstName;
         private String lastName;
         private String middleName;
         private String phoneNumber;
 
-        public Builder() {}
+        public Builder() {
+        }
 
         public Builder firstName(String firstName) {
             this.firstName = firstName;

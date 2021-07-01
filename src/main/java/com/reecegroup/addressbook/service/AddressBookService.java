@@ -4,7 +4,6 @@ import com.reecegroup.addressbook.entity.AddressBook;
 import com.reecegroup.addressbook.entity.Contact;
 
 import java.util.Collection;
-import java.util.List;
 
 public interface AddressBookService {
     AddressBook create(final String name, final Long userId);

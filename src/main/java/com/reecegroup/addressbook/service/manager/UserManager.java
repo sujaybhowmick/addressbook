@@ -16,7 +16,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserManager extends BaseService implements UserService {
@@ -33,7 +36,7 @@ public class UserManager extends BaseService implements UserService {
     public User create(User user) {
         try {
             return this.userRepository.save(user);
-        }catch(DataIntegrityViolationException e) {
+        } catch (DataIntegrityViolationException e) {
             log.info(String.format("User %s already exists", user.getUserName()));
             throw new UserExistsException(e.getCause(), user.getUserName());
         }
@@ -48,7 +51,7 @@ public class UserManager extends BaseService implements UserService {
         Optional<User> user = this.userRepository.findByUserName(userName);
         if (user.isPresent()) {
             return user.get();
-        }else {
+        } else {
             log.info(String.format("User %s not found", userName));
             throw new UserNotFoundException(userName);
         }

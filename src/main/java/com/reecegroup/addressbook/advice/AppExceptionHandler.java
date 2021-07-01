@@ -37,9 +37,9 @@ public class AppExceptionHandler {
     @Value(value = "${exception.contact.exists.message}")
     private String contactExistsMessage;
 
-    @ExceptionHandler({ UserExistsException.class })
+    @ExceptionHandler({UserExistsException.class})
     public ResponseEntity<?> handleUserExistsException(final UserExistsException userExistsException,
-                                                            final WebRequest request) {
+                                                       final WebRequest request) {
         log.error(userExistsMessage, userExistsException);
         final ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST,
                 userExistsException.getClass().getSimpleName(),
@@ -47,7 +47,7 @@ public class AppExceptionHandler {
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
     }
 
-    @ExceptionHandler({ AddressBookExistsException.class })
+    @ExceptionHandler({AddressBookExistsException.class})
     public ResponseEntity<?> handleAddressBookExistsException(
             final AddressBookExistsException addressBookExistsException,
             final WebRequest request) {
@@ -59,7 +59,7 @@ public class AppExceptionHandler {
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
     }
 
-    @ExceptionHandler({ AddressBookNotFoundException.class })
+    @ExceptionHandler({AddressBookNotFoundException.class})
     public ResponseEntity<?> handleAddressBookNotFoundException(
             final AddressBookNotFoundException addressBookNotFoundException,
             final WebRequest webRequest) {
@@ -70,7 +70,7 @@ public class AppExceptionHandler {
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
     }
 
-    @ExceptionHandler({ ContactExistsException.class })
+    @ExceptionHandler({ContactExistsException.class})
     public ResponseEntity<?> handleContactExistsException(
             final ContactExistsException contactExistsException,
             final WebRequest webRequest) {
@@ -84,7 +84,7 @@ public class AppExceptionHandler {
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
     }
 
-    @ExceptionHandler({ ContactNotFoundException.class })
+    @ExceptionHandler({ContactNotFoundException.class})
     public ResponseEntity<?> handleContactNotFoundException(
             final ContactNotFoundException contactNotFoundException,
             final WebRequest webRequest) {
@@ -95,7 +95,7 @@ public class AppExceptionHandler {
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
     }
 
-    @ExceptionHandler({ UserNotFoundException.class })
+    @ExceptionHandler({UserNotFoundException.class})
     public ResponseEntity<Object> handleUserNotFoundException(final UserNotFoundException userNotFoundException,
                                                               final WebRequest request) {
         final ApiError apiError = new ApiError(HttpStatus.NOT_FOUND,
@@ -104,7 +104,7 @@ public class AppExceptionHandler {
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
     }
 
-    @ExceptionHandler( { Exception.class })
+    @ExceptionHandler({Exception.class})
     public ResponseEntity<?> handleExceptions(Exception exception) {
         log.error(exceptionMessage, exception);
         final ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR,
