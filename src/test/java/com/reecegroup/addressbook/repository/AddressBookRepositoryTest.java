@@ -2,6 +2,7 @@ package com.reecegroup.addressbook.repository;
 
 import com.reecegroup.addressbook.entity.AddressBook;
 import com.reecegroup.addressbook.entity.User;
+import com.reecegroup.addressbook.service.manager.AddressBookManagerHelper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,7 +32,7 @@ class AddressBookRepositoryTest extends BaseRepositoryTest {
     @Test
     public void saveAddressBookForUser() {
         final User user = RepositoryTestHelper.createUser("sujaybhowmick1");
-        AddressBook addressBook = RepositoryTestHelper.createAddressBook("Personal1");
+        AddressBook addressBook = AddressBookManagerHelper.createAddressBook("Personal1");
         userRepository.save(user);
         addressBook.setOwner(user);
         user.getAddressBooks().add(addressBook);
@@ -41,13 +42,12 @@ class AddressBookRepositoryTest extends BaseRepositoryTest {
         List<AddressBook> addressBooks = persistedUser.orElseThrow().getAddressBooks();
         assertThat(addressBooks.size()).isEqualTo(1);
         assertThat(addressBooks.get(0).getOwner()).isNotNull();
-
     }
 
     @Test
     public void deleteAddressBookForUser() {
         final User user = RepositoryTestHelper.createUser(USER_NAME);
-        AddressBook addressBook = RepositoryTestHelper.createAddressBook(ADDRESS_BOOK_NAME);
+        AddressBook addressBook = AddressBookManagerHelper.createAddressBook(ADDRESS_BOOK_NAME);
         userRepository.save(user);
         addressBook.setOwner(user);
         user.getAddressBooks().add(addressBook);

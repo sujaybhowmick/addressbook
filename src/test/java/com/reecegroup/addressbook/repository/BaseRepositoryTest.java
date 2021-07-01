@@ -2,6 +2,7 @@ package com.reecegroup.addressbook.repository;
 
 import com.reecegroup.addressbook.entity.AddressBook;
 import com.reecegroup.addressbook.entity.User;
+import com.reecegroup.addressbook.service.manager.AddressBookManagerHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
@@ -32,7 +33,7 @@ public abstract class BaseRepositoryTest {
     }
 
     protected AddressBook saveAddressBookForUser(final String name, final User user) {
-        final AddressBook addressBook = RepositoryTestHelper.createAddressBook(name);
+        final AddressBook addressBook = AddressBookManagerHelper.createAddressBook(name);
         //addressBook.setOwner(user);
         //return addressBookRepository.save(addressBook);
         user.getAddressBooks().add(addressBook);

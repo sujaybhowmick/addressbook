@@ -1,6 +1,7 @@
 package com.reecegroup.addressbook.repository;
 
 import com.reecegroup.addressbook.entity.User;
+import com.reecegroup.addressbook.service.manager.AddressBookManagerHelper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
