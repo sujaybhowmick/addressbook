@@ -10,6 +10,8 @@ import java.util.Optional;
 public interface ContactRepository extends JpaRepository<Contact, Long> {
     List<Contact> findByAddressBookIn(final List<AddressBook> addressBooks);
 
+    List<Contact> findByAddressBook(final AddressBook addressBook);
+
     Optional<Contact> findByContactHashAndAddressBook(final String contactHash, final AddressBook addressBook);
 
 }

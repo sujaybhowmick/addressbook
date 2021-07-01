@@ -55,7 +55,8 @@ public class AddressBookManager extends BaseService implements AddressBookServic
 
     @Override
     public Collection<AddressBook> getAllAddressBooksByUser(Long userId) {
-        return getUserById(userId).getAddressBooks();
+        User owner = getUserById(userId);
+        return addressBookRepository.findByOwner(owner);
     }
 
     @Override
