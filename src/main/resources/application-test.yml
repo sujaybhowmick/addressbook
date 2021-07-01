@@ -20,3 +20,10 @@ spring:
     password: sa
   flyway:
     enabled: false
+logging:
+  level:
+    root: error
+    org:
+      springframework:
+        web: error
+      hibernate: error

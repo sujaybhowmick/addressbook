@@ -1,28 +1,6 @@
 spring:
-  jpa:
-    generate-ddl: false
-    database-platform: org.hibernate.dialect.H2Dialect
-    hibernate:
-      use-new-id-generator-mappings: false
-  datasource:
-    url: 'jdbc:h2:file:/tmp/addressbook'
-    driverClassName: org.h2.Driver
-    username: sa
-    password: sa
-  show-sql: true
-  flyway:
-    enabled: false
-server:
-  servlet:
-    context-path: /addressbook
-logging:
-  file: /var/log/addressbook.log
-  level:
-    root: debug
-    org:
-      springframework:
-        web: debug
-      hibernate: debug
+  profiles:
+    active: dev
 exception:
   all:
     message: Error processing request
