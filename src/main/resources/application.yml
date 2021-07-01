@@ -1,14 +1,43 @@
 spring:
   jpa:
-    generate-ddl: true
+    generate-ddl: false
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       use-new-id-generator-mappings: false
-      default_schema: "public"
   datasource:
     url: 'jdbc:h2:file:/tmp/addressbook'
     driverClassName: org.h2.Driver
     username: sa
     password: sa
+  show-sql: true
   flyway:
-    enabled: true
+    enabled: false
+server:
+  servlet:
+    context-path: /addressbook
+logging:
+  file: /var/log/addressbook.log
+  level:
+    root: debug
+    org:
+      springframework:
+        web: debug
+      hibernate: debug
+exception:
+  all:
+    message: Error processing request
+  user:
+    exists:
+      message: User %s already exists
+    not-found:
+      message: User %s not found
+  addressBook:
+    exists:
+      message: Address Book with name %s already exists for user %s
+    not-found:
+      message: Address Book with Id %d not found
+  contact:
+    exists:
+      message: Contact with following details already exists - %s, %s, %s
+    not-found:
+      message: Contact with Id %d not found
