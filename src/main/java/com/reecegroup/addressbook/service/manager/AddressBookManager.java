@@ -25,7 +25,7 @@ import java.util.*;
 @Service
 public class AddressBookManager extends BaseService implements AddressBookService {
 
-    private Logger log = LoggerFactory.getLogger(AddressBookManager.class);
+    private final Logger log = LoggerFactory.getLogger(AddressBookManager.class);
 
     public AddressBookManager(UserRepository userRepository,
                               AddressBookRepository addressBookRepository,
@@ -66,6 +66,7 @@ public class AddressBookManager extends BaseService implements AddressBookServic
             AddressBook addressBook = optionalAddressBook.get();
             return addressBook.getContacts();
         }
+        log.info(String.format("Address Book with %d not found", addressBookId));
         throw new AddressBookNotFoundException(addressBookId);
     }
 
@@ -80,7 +81,7 @@ public class AddressBookManager extends BaseService implements AddressBookServic
             contact.setAddressBook(addressBook);
             return contactRepository.save(contact);
         }
-        log.info(String.format("Address book with id %d does not exists", addressBookId));
+        log.info(String.format("Address book with id %d not found", addressBookId));
         throw new AddressBookNotFoundException(addressBookId);
     }
 
@@ -92,7 +93,7 @@ public class AddressBookManager extends BaseService implements AddressBookServic
             contactRepository.delete(contact);
             return contact;
         }
+        log.info(String.format("Contact with id %d not found", contactId));
         throw new ContactNotFoundException(contactId);
-
     }
 }

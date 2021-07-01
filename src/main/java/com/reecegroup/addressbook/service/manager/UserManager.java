@@ -11,6 +11,8 @@ import com.reecegroup.addressbook.repository.ContactRepository;
 import com.reecegroup.addressbook.repository.UserRepository;
 import com.reecegroup.addressbook.service.BaseService;
 import com.reecegroup.addressbook.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,7 @@ import java.util.*;
 @Service
 public class UserManager extends BaseService implements UserService {
 
+    private final Logger log = LoggerFactory.getLogger(AddressBookManager.class);
 
     public UserManager(UserRepository userRepository,
                        AddressBookRepository addressBookRepository,
@@ -31,6 +34,7 @@ public class UserManager extends BaseService implements UserService {
         try {
             return this.userRepository.save(user);
         }catch(DataIntegrityViolationException e) {
+            log.info(String.format("User %s already exists", user.getUserName()));
             throw new UserExistsException(e.getCause(), user.getUserName());
         }
     }
@@ -45,6 +49,7 @@ public class UserManager extends BaseService implements UserService {
         if (user.isPresent()) {
             return user.get();
         }else {
+            log.info(String.format("User %s not found", userName));
             throw new UserNotFoundException(userName);
         }
     }
