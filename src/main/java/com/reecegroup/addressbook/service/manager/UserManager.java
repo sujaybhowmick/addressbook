@@ -16,10 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class UserManager extends BaseService implements UserService {
@@ -62,10 +60,8 @@ public class UserManager extends BaseService implements UserService {
         User user = this.getUserById(userId);
         List<AddressBook> addressBooks = addressBookRepository.findByOwner(user);
         List<Contact> contacts = contactRepository.findByAddressBookIn(addressBooks);
-        HashMap<String, UniqueContact> uniqueContacts = new HashMap<>();
-        for (Contact contact : contacts) {
-            uniqueContacts.put(contact.getContactHash(), createUniqueContact(contact));
-        }
+        Map<String, UniqueContact> uniqueContacts = contacts.stream()
+                .collect(Collectors.toMap(Contact::getContactHash, this::createUniqueContact));
         return uniqueContacts.values();
     }
 
