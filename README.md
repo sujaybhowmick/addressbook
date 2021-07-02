@@ -10,7 +10,7 @@
 1. Java 11
 2. SpringBoot 2.5.1
 3. H2 database
-4. Flyway database migration tool
+4. Flyway database migration tool (Optional)
 
 ## Run Tests
 
