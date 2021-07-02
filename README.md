@@ -268,11 +268,11 @@ curl --location --request DELETE 'http://localhost:8080/addressbook/api/v1/conta
 ###### API Responses
 
 ```JSON
-	# 200 OK - Return the deleted Contact information
-	{
+# 200 OK - Return the deleted Contact information
+{
     "data": {
-        "createdAt": "2021-07-02T01:08:41.802529Z",
-        "updatedAt": "2021-07-02T01:08:41.802580Z",
+        "createdAt": "2021-07-02T01:40:32.974741Z",
+        "updatedAt": "2021-07-02T01:40:32.974748Z",
         "version": null,
         "id": 1,
         "contactHash": "19ba7146a1f2c5d5d6f38a5f1bd56141",
@@ -281,14 +281,14 @@ curl --location --request DELETE 'http://localhost:8080/addressbook/api/v1/conta
         "middleName": null,
         "phoneNumber": "+61999333999",
         "addressBook": {
-            "createdAt": "2021-07-02T01:05:27.330298Z",
-            "updatedAt": "2021-07-02T01:05:27.330303Z",
+            "createdAt": "2021-07-02T01:29:14.827582Z",
+            "updatedAt": "2021-07-02T01:29:14.827587Z",
             "version": null,
             "id": 1,
             "addressBookName": "Personal Contacts",
             "owner": {
-                "createdAt": "2021-07-02T01:01:58.856802Z",
-                "updatedAt": "2021-07-02T01:01:58.856811Z",
+                "createdAt": "2021-07-02T01:29:10.907957Z",
+                "updatedAt": "2021-07-02T01:29:10.907969Z",
                 "version": null,
                 "id": 1,
                 "userName": "FooFighter1",
