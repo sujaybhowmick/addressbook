@@ -61,7 +61,8 @@ public class UserManager extends BaseService implements UserService {
         List<AddressBook> addressBooks = addressBookRepository.findByOwner(user);
         List<Contact> contacts = contactRepository.findByAddressBookIn(addressBooks);
         Map<String, UniqueContact> uniqueContacts = contacts.stream()
-                .collect(Collectors.toMap(Contact::getContactHash, this::createUniqueContact));
+                .collect(Collectors.toMap(Contact::getContactHash, this::createUniqueContact,
+                        (uniqueContact1, uniqueContact2) -> uniqueContact1));
         return uniqueContacts.values();
     }
 

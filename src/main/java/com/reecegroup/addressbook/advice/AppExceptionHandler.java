@@ -64,7 +64,7 @@ public class AppExceptionHandler {
             final AddressBookNotFoundException addressBookNotFoundException,
             final WebRequest webRequest) {
         log.error(addressBookNotFoundMessage, addressBookNotFoundException);
-        final ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST,
+        final ApiError apiError = new ApiError(HttpStatus.NOT_FOUND,
                 addressBookNotFoundException.getClass().getSimpleName(),
                 String.format(addressBookNotFoundMessage, addressBookNotFoundException.getAddressBookId()));
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
@@ -89,7 +89,7 @@ public class AppExceptionHandler {
             final ContactNotFoundException contactNotFoundException,
             final WebRequest webRequest) {
         log.error(contactNotFoundMessage, contactNotFoundException);
-        final ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST,
+        final ApiError apiError = new ApiError(HttpStatus.NOT_FOUND,
                 contactNotFoundException.getClass().getSimpleName(),
                 String.format(contactNotFoundMessage, contactNotFoundException.getContactId()));
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
