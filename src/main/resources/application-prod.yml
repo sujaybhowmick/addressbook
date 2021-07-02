@@ -5,15 +5,18 @@ spring:
     hibernate:
       use-new-id-generator-mappings: false
   datasource:
-    url: "jdbc:h2:file:./build/addressbook"
+    url: "jdbc:h2:mem:addressbook"
     driverClassName: org.h2.Driver
     username: sa
     password: sa
   show-sql: true
   flyway:
-    enabled: false
-server:
-  servlet:
-    context-path: /addressbook
-
-
+    enabled: true
+logging:
+  file: /var/log/addressbook.log
+  level:
+    root: info
+    org:
+      springframework:
+        web: info
+      hibernate: info

@@ -1,6 +1,11 @@
 spring:
   profiles:
     active: dev
+  banner:
+    location: classpath:banner.txt
+server:
+  servlet:
+    context-path: /addressbook
 exception:
   all:
     message: Error processing request
