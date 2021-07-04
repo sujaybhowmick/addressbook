@@ -3,6 +3,7 @@ package com.reecegroup.addressbook.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,12 +15,19 @@ public class User extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "user_seq")
     @SequenceGenerator(name = "user_seq", sequenceName = "hibernate_sequence")
     private Long id;
+
     @Column(name = "user_name", nullable = false, unique = true, length = 25)
+    @NotBlank(message = "userName is required")
     private String userName;
+
     @Column(name = "first_name", nullable = false, length = 100)
+    @NotBlank(message = "firstName is required")
     private String firstName;
+
     @Column(name = "last_name", nullable = false, length = 100)
+    @NotBlank(message = "lastName is required")
     private String lastName;
+
     @Column(name = "middle_name", length = 100)
     private String middleName;
     @OneToMany(targetEntity = AddressBook.class, cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)

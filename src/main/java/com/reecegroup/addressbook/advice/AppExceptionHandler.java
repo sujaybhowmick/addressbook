@@ -1,6 +1,7 @@
 package com.reecegroup.addressbook.advice;
 
 import com.reecegroup.addressbook.exception.*;
+import com.reecegroup.addressbook.model.FieldError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +11,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
+
+import javax.validation.ConstraintViolationException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class AppExceptionHandler {
@@ -95,13 +103,28 @@ public class AppExceptionHandler {
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
     }
 
-    @ExceptionHandler({UserNotFoundException.class})
-    public ResponseEntity<Object> handleUserNotFoundException(final UserNotFoundException userNotFoundException,
+    @ExceptionHandler({ UserNotFoundException.class })
+    public ResponseEntity<?> handleUserNotFoundException(final UserNotFoundException userNotFoundException,
                                                               final WebRequest request) {
         final ApiError apiError = new ApiError(HttpStatus.NOT_FOUND,
                 userNotFoundException.getClass().getSimpleName(),
                 String.format(userNotFoundMessage, userNotFoundException.getUserName()));
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
+    }
+
+    @ExceptionHandler({ ConstraintViolationException.class })
+    public ResponseEntity<?> handleValidationExceptions(ConstraintViolationException ex,
+                                                        WebRequest webRequest) {
+        List<FieldError> errors = ex.getConstraintViolations()
+                .stream()
+                .map(constraintViolation -> new FieldError(constraintViolation.getRootBeanClass().getName(),
+                        constraintViolation.getPropertyPath().toString(),
+                        constraintViolation.getInvalidValue(),
+                        constraintViolation.getMessage()))
+                .collect(Collectors.toList());
+
+        return new ResponseEntity<>(errors, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+
     }
 
     @ExceptionHandler({Exception.class})

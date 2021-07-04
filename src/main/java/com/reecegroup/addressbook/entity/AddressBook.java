@@ -3,6 +3,7 @@ package com.reecegroup.addressbook.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class AddressBook extends BaseEntity {
     private Long id;
 
     @Column(name = "addressBookName", unique = true, nullable = false)
+    @NotBlank(message = "addressBookName is required")
     private String addressBookName;
 
     @ManyToOne(targetEntity = User.class, optional = false)

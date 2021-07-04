@@ -3,6 +3,7 @@ package com.reecegroup.addressbook.entity;
 import org.springframework.util.DigestUtils;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
@@ -19,9 +20,11 @@ public class Contact extends BaseEntity {
     private String contactHash;
 
     @Column(name = "first_name", nullable = false, length = 100)
+    @NotBlank(message = "firstName is required")
     private String firstName;
 
     @Column(name = "last_name", nullable = false, length = 100)
+    @NotBlank(message = "lastName is required")
     private String lastName;
 
     @Column(name = "middle_name",
@@ -29,6 +32,7 @@ public class Contact extends BaseEntity {
     private String middleName;
 
     @Column(name = "phone_number", nullable = false, length = 15)
+    @NotBlank(message = "phoneNumber is required")
     private String phoneNumber;
 
     @ManyToOne(targetEntity = AddressBook.class, optional = false)
